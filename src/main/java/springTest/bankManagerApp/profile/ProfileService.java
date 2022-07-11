@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProfileService {
@@ -20,5 +21,15 @@ public class ProfileService {
     @GetMapping
     public List<Profile> getProfiles() {
         return this.profileRepository.findAll();
+    }
+
+    public void addProfile(Profile profile) {
+        System.out.println(profile.toString());
+        Optional<Profile> profileByEmail = this.profileRepository.findProfileByEmail(profile.getEmail());
+
+        if (profileByEmail.isPresent()) {
+            throw new IllegalStateException("This email is taken!");
+        }
+        this.profileRepository.save(profile);
     }
 }
