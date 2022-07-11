@@ -10,4 +10,6 @@ public class BankManagerAppApplication {
 		SpringApplication.run(BankManagerAppApplication.class, args);
 	}
 
+
+
 }
