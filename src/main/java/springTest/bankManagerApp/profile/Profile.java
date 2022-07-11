@@ -2,6 +2,7 @@ package springTest.bankManagerApp.profile;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table
@@ -20,6 +21,7 @@ public class Profile {
     private String name;
     private String email;
     private LocalDate dob;
+    @Transient
     private Integer age;
     // will have list to account objects
 
@@ -32,16 +34,8 @@ public class Profile {
         this.dob = dob;
     }
 
-    public Profile(Long id, String name, String email, LocalDate dob, Integer age) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.dob = dob;
-        this.age = age;
-    }
-
     public Integer getAge() {
-        return age;
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public Long getId() {
