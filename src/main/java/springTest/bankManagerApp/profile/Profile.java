@@ -1,8 +1,12 @@
 package springTest.bankManagerApp.profile;
 
+import springTest.bankManagerApp.account.Account;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -24,6 +28,8 @@ public class Profile {
     @Transient
     private Integer age;
     // will have list to account objects
+    @OneToMany
+    private Set<Account> accounts;
 
     public Profile() {
     }
@@ -32,6 +38,11 @@ public class Profile {
         this.name = name;
         this.email = email;
         this.dob = dob;
+        this.accounts = new HashSet<>();
+    }
+
+    public Set<Account> getAccounts() {
+        return accounts;
     }
 
     public Integer getAge() {
