@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table
-public class Account {
+public abstract class Account {
     @Id
     @SequenceGenerator(
             name = "account_sequence",
@@ -24,16 +24,18 @@ public class Account {
     private Profile owner;
     private String name;
     private LocalDate doc;
+    private Float balance;
     // transaction history
 
 
     public Account() {
     }
 
-    public Account(Profile owner, String name, LocalDate doc) {
+    public Account(Profile owner, String name, LocalDate doc, Float balance) {
         this.owner = owner;
         this.name = name;
         this.doc = doc;
+        this.balance = balance;
     }
 
     public Long getId() {
@@ -68,6 +70,14 @@ public class Account {
         this.doc = doc;
     }
 
+    public Float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Float balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -75,6 +85,7 @@ public class Account {
                 ", owner=" + owner +
                 ", name='" + name + '\'' +
                 ", doc=" + doc +
+                ", balance=" + balance +
                 '}';
     }
 }

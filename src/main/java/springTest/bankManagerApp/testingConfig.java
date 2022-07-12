@@ -3,8 +3,7 @@ package springTest.bankManagerApp;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springTest.bankManagerApp.account.Account;
-import springTest.bankManagerApp.account.AccountRepository;
+import springTest.bankManagerApp.account.*;
 import springTest.bankManagerApp.profile.Profile;
 import springTest.bankManagerApp.profile.ProfileRepository;
 
@@ -38,19 +37,34 @@ public class testingConfig {
 
             profileRepository.saveAll(List.of(bernie, bigbessy, kitty));
 
-            Account ba1 = new Account(
+            Account ba1 = new CashSavingAccount(
                     bernie,
-                    "basic account 1",
-                    LocalDate.of(2005, Month.FEBRUARY, 5)
+                    "HY TFSA cash",
+                    LocalDate.of(1998, Month.APRIL, 1),
+                    25000F,
+                    4.4F
             );
 
-            Account ba2 = new Account(
+            Account ba2 = new ChequingAccount(
                     kitty,
-                    "basic account 222222!",
-                    LocalDate.of(2222, Month.FEBRUARY, 22)
+                    "cheqing account 222222!",
+                    LocalDate.of(2222, Month.FEBRUARY, 22),
+                    5874.44F,
+                    false,
+                    35.95F
             );
 
-            accountRepository.saveAll(List.of(ba1, ba2));
+            Account ba3 = new CreditAccount(
+                    bernie,
+                    "cedit account unsecured",
+                    LocalDate.now(),
+                    8589.43F,
+                    50000.00F,
+                    8.5F
+            );
+            System.out.println(ba3.toString());
+
+            accountRepository.saveAll(List.of(ba1, ba2, ba3));
         };
     }
 }
