@@ -54,7 +54,7 @@ public class testingConfig {
                     35.95F
             );
 
-            Account ba3 = new CreditAccount(
+            CreditAccount ba3 = new CreditAccount(
                     bernie,
                     "cedit account unsecured",
                     LocalDate.now(),
@@ -62,7 +62,7 @@ public class testingConfig {
                     50000.00F,
                     8.5F
             );
-            System.out.println(ba3.toString());
+            System.out.println(ba3.getMinDue());
 
             accountRepository.saveAll(List.of(ba1, ba2, ba3));
         };
