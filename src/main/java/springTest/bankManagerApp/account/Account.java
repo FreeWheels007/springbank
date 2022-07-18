@@ -96,10 +96,12 @@ public abstract class Account {
     }
 
     public void addDebit(Transaction debit) {
+        debit.setReceiverAccount(this);
         this.debitTransactions.add(debit);
     }
 
     public void addCredit(Transaction credit) {
+        credit.setSenderAccount(this);
         this.creditTransactions.add(credit);
     }
 

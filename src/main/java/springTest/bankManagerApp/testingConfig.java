@@ -60,10 +60,10 @@ public class testingConfig {
             bernie.addAccount(bernie_credit);
             profileRepository.saveAll(List.of(bernie, kitty));
 
-            Transaction t1 = new Transaction(bernie_csa,kitty_cheque,bernie,kitty,"t1 test",60.0F,Transaction.Status.COMPLETED);
+            Transaction t1 = new Transaction("t1 test",60.0F,Transaction.Status.COMPLETED);
             bernie_csa.addDebit(t1);
             kitty_cheque.addCredit(t1);
-            Transaction t2 = new Transaction(kitty_cheque,bernie_credit,kitty,bernie,"t2 test",2500F,Transaction.Status.DENIED);
+            Transaction t2 = new Transaction("t2 test",2500F,Transaction.Status.DENIED);
             kitty_cheque.addDebit(t2);
             bernie_credit.addCredit(t2);
 

@@ -18,10 +18,6 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "sender_account_id", referencedColumnName = "id", nullable = false)
     private Account senderAccount;
-    @Transient
-    private Profile receiver;
-    @Transient
-    private Profile sender;
     private String description;
     private Float amount;
     private Status status;
@@ -29,11 +25,15 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Account senderAccount, Account receiverAccount, Profile sender, Profile receiver, String description, Float amount, Status status) {
+    public Transaction(String description, Float amount, Status status) {
+        this.description = description;
+        this.amount = amount;
+        this.status = status;
+    }
+
+    public Transaction(Account senderAccount, Account receiverAccount, String description, Float amount, Status status) {
         this.senderAccount = senderAccount;
         this.receiverAccount = receiverAccount;
-        this.sender = sender;
-        this.receiver = receiver;
         this.description = description;
         this.amount = amount;
         this.status = status;
@@ -47,6 +47,14 @@ public class Transaction {
         this.id = id;
     }
 
+    public void setReceiverAccount(Account receiverAccount) {
+        this.receiverAccount = receiverAccount;
+    }
+
+    public void setSenderAccount(Account senderAccount) {
+        this.senderAccount = senderAccount;
+    }
+
     public Account getSenderAccount() {
         return senderAccount;
     }
@@ -56,11 +64,11 @@ public class Transaction {
     }
 
     public Profile getSender() {
-        return sender;
+        return this.senderAccount.getOwner();
     }
 
     public Profile getReceiver() {
-        return receiver;
+        return this.receiverAccount.getOwner();
     }
 
     public String getDescription() {
