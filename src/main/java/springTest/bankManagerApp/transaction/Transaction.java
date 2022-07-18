@@ -10,19 +10,19 @@ import javax.persistence.*;
 public class Transaction {
     public enum Status {COMPLETED, PENDING, DENIED}
     @Id
-    @SequenceGenerator(
-            name = "transaction_sequence",
-            sequenceName = "transaction_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "transaction_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "receiver_account_id", referencedColumnName = "id", nullable = false)
     private Account receiverAccount;
-    private Profile receiver;
+    @ManyToOne
+    @JoinColumn(name = "sender_account_id", referencedColumnName = "id", nullable = false)
     private Account senderAccount;
+    @ManyToOne
+    @JoinColumn(name = "receiver_profile_id", referencedColumnName = "id", nullable = false)
+    private Profile receiver;
+    @ManyToOne
+    @JoinColumn(name = "sender_profile_id", referencedColumnName = "id", nullable = false)
     private Profile sender;
     private String description;
     private Float amount;
@@ -39,6 +39,14 @@ public class Transaction {
         this.description = description;
         this.amount = amount;
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Account getSenderAccount() {

@@ -1,23 +1,18 @@
 package springTest.bankManagerApp.account;
 
 import springTest.bankManagerApp.profile.Profile;
+import springTest.bankManagerApp.transaction.Transaction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
 public abstract class Account {
     @Id
-    @SequenceGenerator(
-            name = "account_sequence",
-            sequenceName = "account_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "account_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "profile_id", nullable = false)
@@ -26,6 +21,10 @@ public abstract class Account {
     private LocalDate doc;
     private Float balance;
     // transaction history
+    @OneToMany(mappedBy = "receiverAccount")
+    private Set<Transaction> debitTransactions;
+    @OneToMany(mappedBy = "senderAccount")
+    private Set<Transaction> creditTransactions;
 
 
     public Account() {
@@ -36,6 +35,8 @@ public abstract class Account {
         this.name = name;
         this.doc = doc;
         this.balance = balance;
+        this.debitTransactions = new HashSet<>();
+        this.creditTransactions = new HashSet<>();
     }
 
     public Long getId() {
@@ -76,6 +77,22 @@ public abstract class Account {
 
     public void setBalance(Float balance) {
         this.balance = balance;
+    }
+
+    public Set<Transaction> getDebitTransactions() {
+        return debitTransactions;
+    }
+
+    public Set<Transaction> getCreditTransactions() {
+        return creditTransactions;
+    }
+
+    public void addDebit(Transaction debit) {
+        this.debitTransactions.add(debit);
+    }
+
+    public void addCredit(Transaction credit) {
+        this.creditTransactions.add(credit);
     }
 
     @Override

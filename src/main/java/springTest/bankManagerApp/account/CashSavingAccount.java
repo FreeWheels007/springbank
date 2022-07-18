@@ -16,4 +16,12 @@ public class CashSavingAccount extends Account {
         super(owner, name, doc, balance);
         this.interestRate = interestRate;
     }
+
+    @Override
+    public String toString() {
+        return "CashSavingAccount{" +
+                "interestRate=" + interestRate +
+                ", " + super.toString() +
+                '}';
+    }
 }

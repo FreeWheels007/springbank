@@ -12,15 +12,7 @@ import java.util.Set;
 @Table
 public class Profile {
     @Id
-    @SequenceGenerator(
-            name = "profile_sequence",
-            sequenceName = "profile_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "profile_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
@@ -28,7 +20,7 @@ public class Profile {
     @Transient
     private Integer age;
     // will have list to account objects
-    @OneToMany
+    @OneToMany(mappedBy = "owner")
     private Set<Account> accounts;
 
     public Profile() {
@@ -43,6 +35,10 @@ public class Profile {
 
     public Set<Account> getAccounts() {
         return accounts;
+    }
+
+    public void addAccount(Account newAccount) {
+        this.accounts.add(newAccount);
     }
 
     public Integer getAge() {
