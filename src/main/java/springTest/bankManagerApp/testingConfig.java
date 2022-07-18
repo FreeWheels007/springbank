@@ -34,7 +34,6 @@ public class testingConfig {
             );
 
             CashSavingAccount bernie_csa = new CashSavingAccount(
-                    bernie,
                     "HY TFSA cash",
                     LocalDate.of(1998, Month.APRIL, 1),
                     25000F,
@@ -43,7 +42,6 @@ public class testingConfig {
             bernie.addAccount(bernie_csa);
 
             ChequingAccount kitty_cheque = new ChequingAccount(
-                    kitty,
                     "cheqing account 222222!",
                     LocalDate.of(2222, Month.FEBRUARY, 22),
                     5874.44F,
@@ -53,7 +51,6 @@ public class testingConfig {
             kitty.addAccount(kitty_cheque);
 
             CreditAccount bernie_credit = new CreditAccount(
-                    bernie,
                     "cedit account unsecured",
                     LocalDate.now(),
                     8589.43F,
@@ -61,6 +58,7 @@ public class testingConfig {
                     8.5F
             );
             bernie.addAccount(bernie_credit);
+            profileRepository.saveAll(List.of(bernie, kitty));
 
             Transaction t1 = new Transaction(bernie_csa,kitty_cheque,bernie,kitty,"t1 test",60.0F,Transaction.Status.COMPLETED);
             bernie_csa.addDebit(t1);
@@ -71,13 +69,9 @@ public class testingConfig {
 
             System.out.println("save all to db");
 
-            profileRepository.saveAll(List.of(bernie, kitty));
-            accountRepository.saveAll(List.of(bernie_credit,bernie_csa,kitty_cheque));
+
+            //accountRepository.saveAll(List.of(bernie_credit,bernie_csa,kitty_cheque));
             transactionRepository.saveAll(List.of(t1,t2));
-
-            //System.out.println(ba3.getMinDue());
-
-            //accountRepository.saveAll(List.of(ba1, ba2, ba3));
         };
     }
 }

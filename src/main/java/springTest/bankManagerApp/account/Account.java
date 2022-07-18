@@ -15,7 +15,7 @@ public abstract class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "profile_id", nullable = false)
+    @JoinColumn(name = "profile_id", nullable = true)
     private Profile owner;
     private String name;
     private LocalDate doc;
@@ -28,6 +28,14 @@ public abstract class Account {
 
 
     public Account() {
+    }
+
+    public Account(String name, LocalDate doc, Float balance) {
+        this.name = name;
+        this.doc = doc;
+        this.balance = balance;
+        this.debitTransactions = new HashSet<>();
+        this.creditTransactions = new HashSet<>();
     }
 
     public Account(Profile owner, String name, LocalDate doc, Float balance) {

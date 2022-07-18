@@ -18,11 +18,9 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "sender_account_id", referencedColumnName = "id", nullable = false)
     private Account senderAccount;
-    @ManyToOne
-    @JoinColumn(name = "receiver_profile_id", referencedColumnName = "id", nullable = false)
+    @Transient
     private Profile receiver;
-    @ManyToOne
-    @JoinColumn(name = "sender_profile_id", referencedColumnName = "id", nullable = false)
+    @Transient
     private Profile sender;
     private String description;
     private Float amount;

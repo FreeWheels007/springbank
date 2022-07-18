@@ -14,6 +14,12 @@ public class ChequingAccount extends Account {
         super();
     }
 
+    public ChequingAccount(String name, LocalDate doc, Float balance, Boolean hasOverdraft, Float monthlyFee) {
+        super(name, doc, balance);
+        this.hasOverdraft = hasOverdraft;
+        this.monthlyFee = monthlyFee;
+    }
+
     public ChequingAccount(Profile owner, String name, LocalDate doc, Float balance, Boolean hasOverdraft, Float monthlyFee) {
         super(owner, name, doc, balance);
         this.hasOverdraft = hasOverdraft;

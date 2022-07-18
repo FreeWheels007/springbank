@@ -20,7 +20,7 @@ public class Profile {
     @Transient
     private Integer age;
     // will have list to account objects
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private Set<Account> accounts;
 
     public Profile() {
@@ -38,6 +38,7 @@ public class Profile {
     }
 
     public void addAccount(Account newAccount) {
+        newAccount.setOwner(this);
         this.accounts.add(newAccount);
     }
 

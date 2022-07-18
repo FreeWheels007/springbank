@@ -16,6 +16,12 @@ public class CreditAccount extends Account {
     public CreditAccount() {
     }
 
+    public CreditAccount(String name, LocalDate doc, Float balance, Float creditLimit, Float interestRate) {
+        super(name, doc, balance);
+        this.creditLimit = creditLimit;
+        this.interestRate = interestRate;
+    }
+
     public CreditAccount(Profile owner, String name, LocalDate doc, Float balance, Float creditLimit, Float interestRate) {
         super(owner, name, doc, balance);
         this.creditLimit = creditLimit;

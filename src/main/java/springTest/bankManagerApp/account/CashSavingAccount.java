@@ -12,6 +12,11 @@ public class CashSavingAccount extends Account {
     public CashSavingAccount() {
     }
 
+    public CashSavingAccount(String name, LocalDate doc, Float balance, Float interestRate) {
+        super(name, doc, balance);
+        this.interestRate = interestRate;
+    }
+
     public CashSavingAccount(Profile owner, String name, LocalDate doc, Float balance, Float interestRate) {
         super(owner, name, doc, balance);
         this.interestRate = interestRate;
