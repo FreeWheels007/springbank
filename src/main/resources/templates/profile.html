@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Bank Profile Page</title>
+</head>
+<body>
+<h1>Welcome to Spring Bank</h1>
+<h3>Please select your profile below</h3>
+
+<select>
+    <option th:each="profile: ${profiles}" th:text="${profile.name}"></option>
+</select>
+
+</body>
+</html>

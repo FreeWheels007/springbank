@@ -58,7 +58,7 @@ public class testingConfig {
                     8.5F
             );
             bernie.addAccount(bernie_credit);
-            profileRepository.saveAll(List.of(bernie, kitty));
+            //profileRepository.saveAll(List.of(bernie, kitty));
 
             Transaction t1 = new Transaction("t1 test",60.0F,Transaction.Status.COMPLETED);
             bernie_csa.addDebit(t1);
@@ -69,9 +69,9 @@ public class testingConfig {
 
             System.out.println("save all to db");
 
-
+            profileRepository.saveAll(List.of(bernie, kitty));
             //accountRepository.saveAll(List.of(bernie_credit,bernie_csa,kitty_cheque));
-            transactionRepository.saveAll(List.of(t1,t2));
+            //transactionRepository.saveAll(List.of(t1,t2));
         };
     }
 }

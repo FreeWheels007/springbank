@@ -2,6 +2,7 @@ package springTest.bankManagerApp.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -15,9 +16,18 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+//    @GetMapping
+//    public List<Profile> getProfiles() {
+//        return this.profileService.getProfiles();
+//    }
     @GetMapping
-    public List<Profile> getProfiles() {
-        return this.profileService.getProfiles();
+    public ModelAndView profile() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("profile.html");
+
+        List<Profile> profiles = this.profileService.getProfiles();
+        mav.addObject("profiles", profiles);
+        return mav;
     }
 
     @PostMapping
